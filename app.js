@@ -17,6 +17,11 @@ mealList.addEventListener('click', getMealRecipe);
 recipeCloseBtn.addEventListener('click', () => {
     mealDetailsContent.parentElement.classList.remove('showRecipe');
 });
+searchBtn.addEventListener('click', () => {
+    if (searchBtn('clicked' === false)) {
+
+    }
+})
 
 
 function getMealsList() {
@@ -41,7 +46,7 @@ function getMealsList() {
                 });
                 mealList.classList.remove('notFound');
             } else {
-                html ="Sorry, we didn't find any meal!";
+                html = `<p class="no-results">Oops! We don't have that item!</p>`;
                 mealList.classList.add('notFound');
             }
 
