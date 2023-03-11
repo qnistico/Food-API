@@ -12,64 +12,72 @@ searchInput.addEventListener('keypress', (e) => {
 })
 mealList.addEventListener('click', getMealRecipe)
 
+searchBtn.addEventListener('click', getMealsList);
+mealList.addEventListener('click', getMealRecipe);
+recipeCloseBtn.addEventListener('click', () => {
+    mealDetailsContent.parentElement.classList.remove('showRecipe');
+});
+
+
 function getMealsList() {
-    let searchInputText = document.getElementById('search-input').value.trim();
-    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInputText}`)
+    let searchInputTxt = document.getElementById('search-input').value.trim();
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInputTxt}`)
         .then(response => response.json())
         .then(data => {
-            let html = '';
+            let html = "";
             if (data.meals) {
                 data.meals.forEach(meal => {
                     html += `
-                <div class="meal-item" data-id="${meal.idMeal}">
-                        <div class="meal-img">
-                            <img src="${meal.strMealThumb}"
-                                alt="food">
+                    <div class="meal-item" data-id="${meal.idMeal}">
+                        <div class = "meal-img">
+                            <img src="${meal.strMealThumb}" alt = "food">
                         </div>
-                        <div class="meal-item-content">
+                        <div class="meal-name">
                             <h3>${meal.strMeal}</h3>
-                            <div class="recipe-btn-container">
-                                <button class="recipe-btn-sizing"><a href="#" class="recipe-btn">View Recipe <span class="btn-arrow"><i class="fas fa-chevron-right"></i></span></a></button>
-                            </div>
-                            </div>
+                            <a href= "#" class = "recipe-btn">Get Recipe<span class="btn-arrow"><i class="fas fa-chevron-right"></i></span></a>
                         </div>
-                        `
-                })
-              //  mealList.classList.remove('no-result');
+                    </div>
+                `;
+                });
+                mealList.classList.remove('notFound');
             } else {
-                html = `<p class="no-results">Oops! We don't have that recipe!</p>`
+                html ="Sorry, we didn't find any meal!";
+                mealList.classList.add('notFound');
             }
+
             mealList.innerHTML = html;
-        })
-
+        });
 }
-getMealsList()
 
-function getMealRecipe(e){
-    e.preventDefault();
-    if(e.target.classList.contains('recipe-btn')){
+
+// get recipe of the meal
+function getMealRecipe(e) {
+    e.preventDefault()
+    if (e.target.classList.contains('recipe-btn')) {
         let mealItem = e.target.parentElement.parentElement;
         fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealItem.dataset.id}`)
-        .then(response => response.json())
-        .then(data => mealRecipeModal(data.meals));
+            .then(response => response.json())
+            .then(data => mealRecipeModal(data.meals));
     }
 }
 
-function mealRecipeModal(meal){
+// create a modal
+function mealRecipeModal(meal) {
     console.log(meal);
     meal = meal[0];
     let html = `
-        <h2 class = "recipe-title">${meal.strMeal}</h2>
-        <p class = "recipe-category">${meal.strCategory}</p>
-        <div class = "recipe-instruct">
+    <div class="recipe-meal-img">
+            <img src="${meal.strMealThumb}" alt="">
+        </div>
+        <h2 class="recipe-title">${meal.strMeal}</h2>
+        <p class="recipe-category">${meal.strCategory}</p>
+        <div class="recipe-instructions">
             <h3>Instructions:</h3>
             <p>${meal.strInstructions}</p>
         </div>
-        <div class = "recipe-meal-img">
-            <img src = "${meal.strMealThumb}" alt = "">
-        </div>
-        <div class = "recipe-link">
-            <a href = "${meal.strYoutube}" target = "_blank">Watch Video</a>
+        
+        <div class="recipe-link ">
+            <a href="${meal.strYoutube}" target="_blank" class="recipe-btn">Watch Video<span class="btn-arrow"><i class="fas fa-chevron-right"></i></span></a>
         </div>
     `;
     mealDetailsContent.innerHTML = html;
