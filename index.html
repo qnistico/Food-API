@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body>
-    <h1></h1>
-    <script src="app.js"></script>
+    <div class="meal-container">
+        <div class="meal-search">
+            <h1 class="text-center">Find Meals For Your Ingredients</h1>
+            <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem cupiditate
+                modi ab dolores ducimus odio aliquam, debitis sit blanditiis aut architecto atque voluptatibus
+                facere itaque adipisci, maiores, sequi at quia.</p>
+            <div class="meal-searchbar">
+                <input type="text" class="search-textbox" placeholder="Search ingredients" id="search-input">
+                <button type="submit" class="search-btn btn" id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        <div class="result spacing-top">
+            <h2 class="text-center">Results:</h2>
+            <div id="meal" class="meal-grid">
+            </div>
+            </div>
+
+            
+            <script src="app.js"></script>
 </body>
+
 </html>
