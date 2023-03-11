@@ -88,12 +88,13 @@ h1 {
 
 .meal-searchbar {
     display: flex;
+    flex-flow: row nowrap;
     margin-top: 30px;
 }
 
 .meal-searchbar input {
     padding: 15px 20px;
-    min-width: 400px;
+    width: 400px;
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
     font-size: 18px;
@@ -353,5 +354,11 @@ h1 {
 
     .meal-item {
         min-width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .meal-searchbar input {
+        width: 100%;
     }
 }
